@@ -1,6 +1,6 @@
 # PearlBank Secure — University Project Prototype (Improved)
 
-A Flask-based **banking simulation** for the BCS 2104 Data Coding and Encryption assignment. It includes registration, login/logout, dashboard, deposits, withdrawals, transfers between demo accounts, transaction history, receipts, and receipt verification.
+A Flask-based **banking simulation** for Encryption assignment. It includes registration, login/logout, dashboard, deposits, withdrawals, transfers between demo accounts, transaction history, receipts, and receipt verification.
 
 > **Important:** This is a learning prototype with simulated funds. It is not a real bank, payment service, or production financial system. Do not use real customer information or connect it to real money.
 
