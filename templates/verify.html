@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Receipt verification{% endblock %}
+{% block content %}
+<div class="receipt-wrap"><div class="receipt-card">
+  <div class="receipt-top"><div class="receipt-check">{{ '✓' if verified else '!' }}</div><h1 class="h3 mt-3">Receipt verification</h1>
+  {% if verified %}<p class="text-success fw-semibold">This transaction record passed verification.</p>{% else %}<p class="text-danger fw-semibold">We couldn't verify this transaction record.</p>{% endif %}
+  </div>
+  <div class="receipt-row"><span>Reference</span><strong>{{ tx.reference }}</strong></div>
+  <div class="receipt-row"><span>Transaction type</span><strong>{{ tx.kind.replace('_',' ')|title }}</strong></div>
+  <div class="receipt-row"><span>Amount</span><strong>{{ tx.amount_cents|ugx }}</strong></div>
+  <div class="receipt-row"><span>Date and time (UTC)</span><strong>{{ tx.created_at }}</strong></div>
+  {% if note %}
+  <div class="receipt-row"><span>Description</span><strong>{{ note }}</strong></div>
+  {% endif %}
+  <div class="receipt-row"><span>Result</span><strong>{{ 'Verified' if verified else 'Not verified' }}</strong></div>
+  <p class="small text-secondary mt-4">Verification checks whether the saved transaction fields match their recorded hash and digital signature. It does not guarantee the account holder's real-world identity or make this a regulated bank receipt.</p>
+  <a class="btn btn-primary w-100 mt-2" href="{{ url_for('history') }}">Return to transaction history</a>
+</div></div>
+{% endblock %}

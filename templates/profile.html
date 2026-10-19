@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}My account{% endblock %}
+{% block content %}
+<div class="page-heading mb-4"><span class="eyebrow">PERSONAL BANKING</span><h1 class="h2 mt-2">My account</h1><p class="text-secondary">Review your PearlBank account details.</p></div>
+<div class="row g-4"><div class="col-lg-8"><div class="section-card">
+  <div class="profile-avatar">{{ user.full_name[:1].upper() }}</div>
+  <h2 class="h4 mt-3">{{ user.full_name }}</h2><p class="text-secondary">{{ user.email }}</p>
+  <hr>
+  <div class="receipt-row"><span>Account number</span><strong>{{ user.account_number }}</strong></div>
+  <div class="receipt-row"><span>Account status</span><strong><span class="badge text-bg-success">Active demo account</span></strong></div>
+  <div class="receipt-row"><span>Opened on</span><strong>{{ user.created_at[:10] }}</strong></div>
+  <div class="receipt-row"><span>Account type</span><strong>PearlBank Everyday (Demo)</strong></div>
+</div></div><div class="col-lg-4"><div class="info-panel"><h2 class="h5">Keep your account safe</h2><p>Use a unique password, sign out on shared devices and never share your password with anyone.</p><form method="post" action="{{ url_for('logout') }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="btn btn-outline-primary w-100">Sign out securely</button></form></div></div></div>
+{% endblock %}

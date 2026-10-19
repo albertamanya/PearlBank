@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Open an account{% endblock %}
+{% block content %}
+<div class="auth-wrap"><div class="auth-card">
+  <span class="eyebrow">JOIN PEARLBANK</span><h1 class="h2 mt-2">Open your account</h1>
+  <p class="text-secondary">Create your PearlBank demo account in a few steps.</p>
+  <form method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="mb-3"><label class="form-label">Full name</label><input class="form-control" name="full_name" required maxlength="100" autocomplete="name"></div>
+    <div class="mb-3"><label class="form-label">Email address</label><input class="form-control" type="email" name="email" required autocomplete="email"></div>
+    <div class="mb-3">
+      <label class="form-label">Create password</label>
+      <input class="form-control" type="password" name="password" minlength="10" required autocomplete="new-password">
+      <div class="form-text">At least 10 characters with uppercase, lowercase, and a number or symbol.</div>
+    </div>
+    <div class="mb-4"><label class="form-label">Confirm password</label><input class="form-control" type="password" name="confirm_password" minlength="10" required autocomplete="new-password"></div>
+    <button class="btn btn-primary w-100 btn-lg">Create my account</button>
+  </form>
+  <p class="text-center mt-4 mb-0">Already registered? <a href="{{ url_for('login') }}">Sign in</a></p>
+</div></div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Transfer money{% endblock %}
+{% block content %}
+<div class="page-heading mb-4"><a class="back-link" href="{{ url_for('dashboard') }}">← Account overview</a><h1 class="h2 mt-3">Transfer money</h1><p class="text-secondary">Send simulated funds to another PearlBank demo account.</p></div>
+<div class="row g-4"><div class="col-lg-7"><div class="section-card">
+<form method="post">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <div class="mb-3"><label class="form-label">Recipient account number</label><input class="form-control form-control-lg" name="account_number" placeholder="PB1234567890" required maxlength="20"><div class="form-text">Ask the recipient for the account number shown on their PearlBank profile.</div></div>
+  <div class="mb-3"><label class="form-label">Amount (UGX)</label><div class="input-group input-group-lg"><span class="input-group-text">UGX</span><input class="form-control" type="number" name="amount" min="1" max="1000000" step="1" placeholder="0" required></div></div>
+  <div class="mb-4"><label class="form-label">Payment description (optional)</label><input class="form-control" name="note" maxlength="180" placeholder="e.g. Shared expenses"></div>
+  <button class="btn btn-primary btn-lg w-100">Review and send transfer</button>
+</form></div></div><div class="col-lg-5"><div class="info-panel"><h2 class="h5">Transfer safely</h2><ul><li>Double-check the recipient account number.</li><li>Transfers cannot be reversed automatically in this demo.</li><li>Only transfer amounts you have deposited into your demo account.</li></ul><p class="small text-secondary mb-0">This prototype does not connect to a payment network or real bank.</p></div></div></div>
+{% endblock %}

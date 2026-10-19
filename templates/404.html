@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block title %}Page not found{% endblock %}
+{% block content %}
+<div class="empty-state py-5"><div class="feature-icon mx-auto">?</div><h1 class="h3 mt-3">We couldn't find that page</h1><p class="text-secondary">The page or transaction may not exist, or it may not belong to your account.</p><a class="btn btn-primary" href="{{ url_for('dashboard') if current_user else url_for('home') }}">Return to PearlBank</a></div>
+{% endblock %}

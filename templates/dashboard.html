@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Account overview{% endblock %}
+{% block content %}
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end gap-3 mb-4">
+  <div><span class="eyebrow">ACCOUNT OVERVIEW</span><h1 class="h2 mt-2 mb-1">Good to see you, {{ user.full_name.split(' ')[0] }}.</h1><p class="text-secondary mb-0">Here is the latest activity on your PearlBank account.</p></div>
+  <div class="account-number">Account number <strong>{{ user.account_number }}</strong></div>
+</div>
+<div class="row g-3 mb-4">
+  <div class="col-lg-6"><div class="balance-card h-100"><div class="d-flex justify-content-between align-items-center"><span>Available balance</span><span class="status-pill">Demo account</span></div><div class="display-5 fw-bold my-3">{{ balance|ugx }}</div><span class="small muted-light">Your balance reflects the latest recorded activity.</span></div></div>
+  <div class="col-lg-6"><div class="action-panel h-100"><h2 class="h5 mb-3">Quick actions</h2><div class="row g-2">
+    <div class="col-4"><a class="quick-action" href="{{ url_for('deposit') }}"><span>＋</span><small>Deposit</small></a></div>
+    <div class="col-4"><a class="quick-action" href="{{ url_for('withdraw') }}"><span>−</span><small>Withdraw</small></a></div>
+    <div class="col-4"><a class="quick-action" href="{{ url_for('transfer') }}"><span>↗</span><small>Transfer</small></a></div>
+  </div></div></div>
+</div>
+<div class="section-card">
+  <div class="d-flex justify-content-between align-items-center mb-3"><div><h2 class="h5 mb-1">Recent transactions</h2><p class="text-secondary small mb-0">Your latest account activity</p></div><a href="{{ url_for('history') }}">View all</a></div>
+  {% if transactions %}
+  <div class="table-responsive"><table class="table align-middle"><thead><tr><th>Details</th><th>Date</th><th>Reference</th><th class="text-end">Amount</th></tr></thead><tbody>
+  {% for tx in transactions %}<tr><td><span class="transaction-dot {{ 'inflow' if tx.kind in ['deposit','transfer_in'] else 'outflow' }}">{{ '↓' if tx.kind in ['deposit','transfer_in'] else '↑' }}</span><strong class="ms-2">{{ tx.kind.replace('_',' ')|title }}</strong></td><td>{{ tx.created_at[:10] }}</td><td><a href="{{ url_for('receipt', reference=tx.reference) }}">{{ tx.reference }}</a></td><td class="text-end fw-semibold {{ 'text-success' if tx.kind in ['deposit','transfer_in'] else '' }}">{{ '+' if tx.kind in ['deposit','transfer_in'] else '−' }}{{ tx.amount_cents|ugx }}</td></tr>{% endfor %}
+  </tbody></table></div>
+  {% else %}<div class="empty-state"><div class="feature-icon mx-auto">↗</div><h3 class="h5">Your account is ready</h3><p class="text-secondary">Make your first demo deposit to see activity here.</p><a class="btn btn-primary" href="{{ url_for('deposit') }}">Deposit funds</a></div>{% endif %}
+</div>
+{% endblock %}

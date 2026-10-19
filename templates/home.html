@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Welcome{% endblock %}
+{% block content %}
+<section class="hero rounded-4 p-4 p-lg-5 mb-5">
+  <div class="row align-items-center g-4">
+    <div class="col-lg-7">
+      <span class="eyebrow">BANKING MADE SIMPLE</span>
+      <h1 class="display-5 fw-bold mt-3">Your money matters.<br><span class="accent">Your peace of mind too.</span></h1>
+      <p class="lead mt-3 mb-4">Manage your demo account, review activity and move funds between PearlBank accounts through one clear, convenient dashboard.</p>
+      <a class="btn btn-primary btn-lg me-2 mb-2" href="{{ url_for('register') }}">Open an account</a>
+      <a class="btn btn-outline-light btn-lg mb-2" href="{{ url_for('login') }}">Sign in</a>
+      <p class="small mt-3 mb-0 muted-light">A university project banking simulation. No real money or bank accounts are connected.</p>
+    </div>
+    <div class="col-lg-5">
+      <div class="hero-card">
+        <div class="d-flex justify-content-between"><span>PEARLBANK ACCOUNT</span><span>•••• 2048</span></div>
+        <div class="mt-5 small">AVAILABLE BALANCE</div>
+        <div class="display-6 fw-bold">UGX ———</div>
+        <div class="d-flex gap-2 mt-4"><span class="mini-chip">Deposits</span><span class="mini-chip">Transfers</span><span class="mini-chip">Receipts</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="row g-4">
+  <div class="col-md-4"><div class="feature-card h-100"><div class="feature-icon">↗</div><h3>Everyday banking</h3><p>Deposit, withdraw and transfer simulated funds with clear confirmations.</p></div></div>
+  <div class="col-md-4"><div class="feature-card h-100"><div class="feature-icon">✓</div><h3>Clear records</h3><p>Review transaction references, receipts and verification results whenever you need them.</p></div></div>
+  <div class="col-md-4"><div class="feature-card h-100"><div class="feature-icon">⌁</div><h3>Account privacy</h3><p>Your account pages and transaction history are available after you sign in.</p></div></div>
+</div>
+{% endblock %}

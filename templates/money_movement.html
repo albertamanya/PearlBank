@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}{{ action }}{% endblock %}
+{% block content %}
+<div class="page-heading mb-4"><a class="back-link" href="{{ url_for('dashboard') }}">← Account overview</a><h1 class="h2 mt-3">{{ action }}</h1><p class="text-secondary">{{ description }}</p></div>
+<div class="row g-4"><div class="col-lg-7"><div class="section-card">
+<form method="post">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <div class="mb-3"><label class="form-label">Amount (UGX)</label><div class="input-group input-group-lg"><span class="input-group-text">UGX</span><input class="form-control" type="number" name="amount" min="1" max="1000000" step="1" placeholder="0" required></div><div class="form-text">Enter an amount between UGX 1 and UGX 1,000,000.</div></div>
+  <div class="mb-4"><label class="form-label">Description (optional)</label><input class="form-control" name="note" maxlength="180" placeholder="e.g. Monthly savings"></div>
+  <button class="btn btn-primary btn-lg w-100">{{ action }}</button>
+</form>
+</div></div><div class="col-lg-5"><div class="info-panel"><h2 class="h5">Before you continue</h2><ul class="mb-0"><li>Review the amount before submitting.</li><li>Keep your transaction reference for your records.</li><li>This is a simulated transaction; no real funds move.</li></ul></div></div></div>
+{% endblock %}

@@ -1,0 +1,7 @@
+__pycache__/
+.venv/
+*.pyc
+pearlbank.db
+data_key.bin
+signing_private.pem
+.env

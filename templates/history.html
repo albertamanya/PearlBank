@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Transaction history{% endblock %}
+{% block content %}
+<div class="page-heading mb-4"><span class="eyebrow">ACCOUNT ACTIVITY</span><h1 class="h2 mt-2">Transaction history</h1><p class="text-secondary">Review deposits, withdrawals and transfers recorded on your account.</p></div>
+<div class="section-card">
+{% if transactions %}<div class="table-responsive"><table class="table align-middle"><thead><tr><th>Transaction</th><th>Date and time</th><th>Reference</th><th>Balance after</th><th>Status</th></tr></thead><tbody>
+{% for tx in transactions %}<tr>
+  <td>
+    <strong>{{ tx.kind.replace('_',' ')|title }}</strong>
+    <div class="small text-secondary">{{ tx.amount_cents|ugx }}</div>
+    {% set note = tx.note_encrypted|decrypt_note %}
+    {% if note %}<div class="small text-muted mt-1">{{ note }}</div>{% endif %}
+  </td>
+  <td>{{ tx.created_at.replace('T',' ') }}</td>
+  <td><a href="{{ url_for('receipt', reference=tx.reference) }}">{{ tx.reference }}</a></td>
+  <td>{{ tx.balance_after_cents|ugx }}</td>
+  <td><span class="badge text-bg-success">Recorded</span></td>
+</tr>{% endfor %}
+</tbody></table></div>{% else %}<div class="empty-state"><h3 class="h5">No transactions yet</h3><p class="text-secondary">Your transaction activity will appear here.</p></div>{% endif %}
+</div>
+{% endblock %}

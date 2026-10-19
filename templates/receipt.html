@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Transaction receipt{% endblock %}
+{% block content %}
+<div class="receipt-wrap"><div class="receipt-card">
+  <div class="receipt-top"><div class="receipt-check">✓</div><h1 class="h3 mt-3">Transaction receipt</h1><p class="text-secondary">Keep this confirmation for your records.</p></div>
+  <div class="receipt-amount">{{ tx.amount_cents|ugx }}</div>
+  <div class="text-center mb-4"><span class="badge text-bg-success">{{ 'Verified record' if verified else 'Verification required' }}</span></div>
+  <div class="receipt-row"><span>Transaction type</span><strong>{{ tx.kind.replace('_',' ')|title }}</strong></div>
+  <div class="receipt-row"><span>Reference</span><strong>{{ tx.reference }}</strong></div>
+  <div class="receipt-row"><span>Date and time (UTC)</span><strong>{{ tx.created_at }}</strong></div>
+  <div class="receipt-row"><span>Account balance after</span><strong>{{ tx.balance_after_cents|ugx }}</strong></div>
+  {% if note %}
+  <div class="receipt-row"><span>Description</span><strong>{{ note }}</strong></div>
+  {% endif %}
+  <div class="receipt-row"><span>Record verification</span><strong>{{ 'Passed' if verified else 'Failed' }}</strong></div>
+  <div class="d-grid gap-2 mt-4"><a class="btn btn-primary" href="{{ url_for('verify_receipt', reference=tx.reference) }}">Verify this receipt</a><a class="btn btn-outline-secondary" href="{{ url_for('history') }}">Back to transaction history</a></div>
+  <p class="small text-secondary text-center mt-3 mb-0">PearlBank demo receipt · No real funds transferred</p>
+</div></div>
+{% endblock %}
